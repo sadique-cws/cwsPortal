@@ -35,8 +35,17 @@
                             <td>{{ $pay->due_date }}</td>
                             <td>{{ $pay->amount }}</td>
                             <td>
-                                <a href="" class="btn btn-success">Pay</a>
+                                @if ($pay->status == "due")
+                                <form action="{{ route('makePayment') }}" method="POST">
+                                    <input type="hidden" value="{{ $pay->student->contact }}" name="contact">
+                                     <input type="hidden" value="{{ $pay->id }}" name="pay_id"> 
+                                     @csrf
+                                     <input type="submit" class="btn btn-success" value="Pay">
+                                 </form>
+                                @else 
                                 <a href="" class="btn btn-success disabled">Paid</a>
+                                @endif
+                                
                             </td>
                         </tr>
                     @endforeach

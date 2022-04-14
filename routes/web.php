@@ -10,6 +10,8 @@ Route::get("/courses", [HomeController::class, "courses"])->name("courses");
 Route::get("/",[HomeController::class,"index"])->name("homepage");
 Route::get("/contact", [HomeController::class,"contact"])->name("contact");
 Route::match(["post","get"],"/online-payment", [HomeController::class, "onlinePayment"])->name("online-payment"); 
+Route::post("/online-payment/make-payment",[HomeController::class,"makePayment"])->name("makePayment");
+Route::post("/online-payment/call-back",[HomeController::class,"paymentCallback"])->name("callback");
 
 
 Route::prefix("admin")->middleware("auth")->group(function(){
